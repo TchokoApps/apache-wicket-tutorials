@@ -16,6 +16,9 @@ public class Address {
     private String state;
     private String cep;
 
+    public Address() {
+    }
+
     public Address(String street, Integer number, String district, String city, String state, String cep) {
         this.street = street;
         this.number = number;
