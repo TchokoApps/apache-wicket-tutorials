@@ -31,7 +31,7 @@ public class HomePage extends WebPage {
 
     private static final long serialVersionUID = 1L;
 
-    private static final String FEEDBACK_PANEL_ID = "feedbackaPanel";
+    private static final String FEEDBACK_PANEL_ID = "feedbackPanel";
     private final static ResourceReference LOGO = new PackageResourceReference(HomePage.class,"logo.png");
     public static final String TITLE = "Wicket Bootstrap Sample";
 
@@ -42,6 +42,7 @@ public class HomePage extends WebPage {
         final StringValue theme = parameters.get("theme");
         handleTheme(theme);
         addNavBar(theme);
+        addOrReplaceContentPanel(new PatientContentPanel());
     }
 
     private void addNavBar(StringValue theme) {
@@ -53,21 +54,15 @@ public class HomePage extends WebPage {
 
         navbar.addComponents(new ImmutableNavbarComponent(new NavbarDropDownButton(Model.of("Basic Data")) {
 
-            private static final long serialVersionUID = 1L;
-
             @Override
             protected List<AbstractLink> newSubMenuButtons(final String buttonMarkupId) {
                 final List<AbstractLink> subMenu = new ArrayList<AbstractLink>();
-
                 subMenu.add(new NavbarAjaxLink<String>(ButtonList.getButtonMarkupId(), Model.of("Patient")) {
-
                     @Override
                     public void onClick(final AjaxRequestTarget target) {
-//                        cleanFeedbackPanel(target);
                         addOrReplaceContentPanel(new PatientContentPanel(), target);
                     }
                 });
-
                 return subMenu;
             }
         }));
@@ -94,6 +89,10 @@ public class HomePage extends WebPage {
                 settings.getActiveThemeProvider().setActiveTheme(theme.toString(""));
             }
         }
+    }
+
+    void addOrReplaceContentPanel(final AbstractDefaultContentPanel contentPanel) {
+        addOrReplaceContentPanel(contentPanel, null);
     }
 
     void addOrReplaceContentPanel(final AbstractDefaultContentPanel contentPanel, final AjaxRequestTarget target) {

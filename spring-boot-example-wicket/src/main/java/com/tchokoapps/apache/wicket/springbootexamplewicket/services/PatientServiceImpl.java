@@ -2,6 +2,10 @@ package com.tchokoapps.apache.wicket.springbootexamplewicket.services;
 
 import com.tchokoapps.apache.wicket.springbootexamplewicket.entities.Patient;
 import com.tchokoapps.apache.wicket.springbootexamplewicket.repositories.PatientRepository;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -42,7 +46,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public List<Patient> list(long first, long count) {
-        return null;
+        return patientRepository.findAll();
     }
 
     @Override

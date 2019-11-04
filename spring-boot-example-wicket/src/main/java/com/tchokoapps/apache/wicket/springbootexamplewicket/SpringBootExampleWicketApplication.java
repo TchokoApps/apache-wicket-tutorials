@@ -126,7 +126,6 @@ public class SpringBootExampleWicketApplication extends WebApplication {
                         final HomePage page = (HomePage) handler.getPage();
                         for (final ConstraintViolation<?> constraint : cause.getConstraintViolations()) {
                             final NotificationMessage message = new NotificationMessage(new StringResourceModel(constraint.getMessageTemplate().replace("{", "").replace("}", ""), page, Model.of(constraint.getPropertyPath().toString())));
-//                            page.showErrorMessage(null, message);
                         }
                         return new RenderPageRequestHandler(new PageProvider(page));
                     }

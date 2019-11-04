@@ -2,7 +2,9 @@ package com.tchokoapps.apache.wicket.springbootexamplewicket.entities;
 
 import lombok.Data;
 
-public enum AppointmentStatus {
+import java.io.Serializable;
+
+public enum AppointmentStatus implements Serializable {
 
     CANCEL("cancel"), PENDING("pending"), PERFORMED("performed");
 

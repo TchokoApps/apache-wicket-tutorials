@@ -21,6 +21,7 @@ public abstract class AbstractDefaultContentPanel extends Panel {
 
     public AbstractDefaultContentPanel() {
         super(PANEL_ID);
+        getComponentUtils().prepareComponent(this);
         addLefForm();
         addRightForm();
     }

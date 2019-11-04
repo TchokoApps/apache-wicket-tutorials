@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @Data
 @Embeddable
-public class Address {
+public class Address implements Serializable {
 
     private String street;
     private Integer number;
