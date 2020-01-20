@@ -5,7 +5,7 @@ import de.agilecoders.wicket.core.markup.html.bootstrap.form.BootstrapForm;
 import de.agilecoders.wicket.core.markup.html.bootstrap.form.FormType;
 import org.apache.wicket.markup.html.panel.Panel;
 
-public abstract class AbstractDefaultContentPanel extends Panel {
+public abstract class AbstractDefaultContentPanel extends AbstractBaseContentPanel {
 
     private static final long serialVersionUID = 1L;
 
@@ -13,15 +13,8 @@ public abstract class AbstractDefaultContentPanel extends Panel {
 
     private static final String RIGHT_FORM_ID = "rightForm";
 
-    public final static String PANEL_ID = "contentPanel";
-
-    protected WicketComponentUtils getComponentUtils() {
-        return WicketComponentUtils.getInstance();
-    }
-
     public AbstractDefaultContentPanel() {
-        super(PANEL_ID);
-        getComponentUtils().prepareComponent(this);
+        super();
         addLefForm();
         addRightForm();
     }

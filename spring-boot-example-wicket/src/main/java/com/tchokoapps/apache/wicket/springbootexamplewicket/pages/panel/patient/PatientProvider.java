@@ -1,4 +1,4 @@
-package com.tchokoapps.apache.wicket.springbootexamplewicket.pages.panel.patients;
+package com.tchokoapps.apache.wicket.springbootexamplewicket.pages.panel.patient;
 
 import com.tchokoapps.apache.wicket.springbootexamplewicket.entities.Patient;
 import com.tchokoapps.apache.wicket.springbootexamplewicket.services.PatientService;

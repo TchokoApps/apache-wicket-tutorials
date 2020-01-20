@@ -1,6 +1,5 @@
-package com.tchokoapps.apache.wicket.springbootexamplewicket.pages.panel.common.form;
+package com.tchokoapps.apache.wicket.springbootexamplewicket.pages.button;
 
-import com.tchokoapps.apache.wicket.springbootexamplewicket.pages.HomePage;
 import de.agilecoders.wicket.core.markup.html.bootstrap.button.BootstrapAjaxButton;
 import de.agilecoders.wicket.core.markup.html.bootstrap.button.Buttons;
 import de.agilecoders.wicket.core.markup.html.bootstrap.image.GlyphIconType;

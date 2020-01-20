@@ -1,7 +1,7 @@
 package com.tchokoapps.apache.wicket.springbootexamplewicket.pages;
 
 import com.tchokoapps.apache.wicket.springbootexamplewicket.pages.panel.AbstractDefaultContentPanel;
-import com.tchokoapps.apache.wicket.springbootexamplewicket.pages.panel.patients.PatientContentPanel;
+import com.tchokoapps.apache.wicket.springbootexamplewicket.pages.panel.patient.PatientContentPanel;
 import com.tchokoapps.apache.wicket.springbootexamplewicket.pages.util.WicketComponentUtils;
 import de.agilecoders.wicket.core.Bootstrap;
 import de.agilecoders.wicket.core.markup.html.bootstrap.button.ButtonList;
