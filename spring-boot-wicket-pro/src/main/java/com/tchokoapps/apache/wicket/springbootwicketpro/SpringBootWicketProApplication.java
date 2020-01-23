@@ -1,10 +1,10 @@
 package com.tchokoapps.apache.wicket.springbootwicketpro;
 
-import com.tchokoapps.apache.wicket.springbootwicketpro.pages.HomePage;
+import com.tchokoapps.apache.wicket.springbootwicketpro.pages.Index;
 import com.tchokoapps.apache.wicket.springbootwicketpro.pages.extensions.Login;
 import com.tchokoapps.apache.wicket.springbootwicketpro.pages.extensions.UserProfilePage;
+import com.tchokoapps.apache.wicket.springbootwicketpro.pages.extensions.Welcome;
 import de.agilecoders.wicket.core.Bootstrap;
-import de.agilecoders.wicket.core.markup.html.bootstrap.common.NotificationMessage;
 import de.agilecoders.wicket.core.settings.BootstrapSettings;
 import de.agilecoders.wicket.core.settings.DefaultThemeProvider;
 import de.agilecoders.wicket.core.settings.ITheme;
@@ -12,18 +12,9 @@ import de.agilecoders.wicket.themes.markup.html.bootswatch.BootswatchTheme;
 import de.agilecoders.wicket.themes.markup.html.google.GoogleTheme;
 import de.agilecoders.wicket.themes.markup.html.material_design.MaterialDesignTheme;
 import de.agilecoders.wicket.themes.markup.html.vegibit.VegibitTheme;
-import org.apache.wicket.core.request.handler.IPageRequestHandler;
-import org.apache.wicket.core.request.handler.PageProvider;
-import org.apache.wicket.core.request.handler.RenderPageRequestHandler;
 import org.apache.wicket.markup.html.WebPage;
-import org.apache.wicket.model.Model;
-import org.apache.wicket.model.StringResourceModel;
 import org.apache.wicket.protocol.http.WebApplication;
-import org.apache.wicket.request.IRequestHandler;
-import org.apache.wicket.request.cycle.AbstractRequestCycleListener;
-import org.apache.wicket.request.cycle.RequestCycle;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
-import org.apache.wicket.util.lang.Exceptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -31,12 +22,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 import javax.validation.Validator;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @SpringBootApplication
 public class SpringBootWicketProApplication extends WebApplication {
@@ -113,15 +101,17 @@ public class SpringBootWicketProApplication extends WebApplication {
 
     @Override
     public Class<? extends WebPage> getHomePage() {
-        return HomePage.class;
+        return Index.class;
     }
 
     @Override
     protected void init() {
         super.init();
         getComponentInstantiationListeners().add(new SpringComponentInjector(this, applicationContext));
+        mountPage("/Index.html", Index.class);
         mountPage("/Login.html", Login.class);
         mountPage("/UserProfilePage.html", UserProfilePage.class);
+        mountPage("/Welcome.html", Welcome.class);
         configBootstrap();
     }
 

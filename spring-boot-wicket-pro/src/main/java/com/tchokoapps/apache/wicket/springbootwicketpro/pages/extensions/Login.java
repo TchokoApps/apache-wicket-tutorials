@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.model.Model;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.PropertyModel;
 
 @Slf4j
@@ -18,30 +18,42 @@ public class Login extends AppBasePage {
     private String password;
 
     public Login() {
+        FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
         TextField userIdTextField = new TextField("userId", new PropertyModel(this, "userId"));
         PasswordTextField passwordTextField = new PasswordTextField("password", new PropertyModel(this, "password"));
         passwordTextField.setResetPassword(false);
-
-        Form form = new Form("loginForm") {
-            @Override
-            protected void onSubmit() {
-                log.info("You entered userId={} and password={}", userId, password);
-                if (authenticate(getUserId(), getPassword())) {
-                    log.info("User authenticate successfully");
-                } else {
-                    log.info("Authentification failed. Please try again");
-                }
-            }
-        };
-
-        form.add(userIdTextField);
-        form.add(passwordTextField);
-        this.add(form);
+        LoginForm loginForm = new LoginForm("form");
+        loginForm.add(userIdTextField);
+        loginForm.add(passwordTextField);
+        add(feedbackPanel);
+        add(loginForm);
     }
 
     public boolean authenticate(final String userId, final String password) {
         if (WICKET.equalsIgnoreCase(userId) && WICKET.equalsIgnoreCase(password))
             return true;
         else return false;
+    }
+
+    class LoginForm extends Form<Void> {
+
+        public LoginForm(String id) {
+            super(id);
+        }
+
+        @Override
+        protected void onSubmit() {
+            log.info("You entered userId={} and password={}", userId, password);
+            if (authenticate(getUserId(), getPassword())) {
+                Welcome welcomePage = new Welcome();
+                welcomePage.setUserId(getUserId());
+                setResponsePage(welcomePage);
+                log.info("User authenticate successfully");
+            } else {
+                log.info("Authentification failed. Please try again");
+                String errMsg = getLocalizer().getString("login.errors.invalidCredentials", Login.this, "Unable to sign you in");
+                error(errMsg);
+            }
+        }
     }
 }
