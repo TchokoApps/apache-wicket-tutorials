@@ -1,9 +1,12 @@
 package com.tchokoapps.apache.wicket.springbootwicketpro;
 
 import com.tchokoapps.apache.wicket.springbootwicketpro.pages.Index;
-import com.tchokoapps.apache.wicket.springbootwicketpro.pages.extensions.Login;
-import com.tchokoapps.apache.wicket.springbootwicketpro.pages.extensions.UserProfilePage;
-import com.tchokoapps.apache.wicket.springbootwicketpro.pages.extensions.Welcome;
+import com.tchokoapps.apache.wicket.springbootwicketpro.pages.Login;
+import com.tchokoapps.apache.wicket.springbootwicketpro.pages.UserProfilePage;
+import com.tchokoapps.apache.wicket.springbootwicketpro.pages.Welcome;
+import com.tchokoapps.apache.wicket.springbootwicketpro.repositories.BookRepository;
+import com.tchokoapps.apache.wicket.springbootwicketpro.services.BookService;
+import com.tchokoapps.apache.wicket.springbootwicketpro.services.CategoryService;
 import de.agilecoders.wicket.core.Bootstrap;
 import de.agilecoders.wicket.core.settings.BootstrapSettings;
 import de.agilecoders.wicket.core.settings.DefaultThemeProvider;
@@ -12,10 +15,12 @@ import de.agilecoders.wicket.themes.markup.html.bootswatch.BootswatchTheme;
 import de.agilecoders.wicket.themes.markup.html.google.GoogleTheme;
 import de.agilecoders.wicket.themes.markup.html.material_design.MaterialDesignTheme;
 import de.agilecoders.wicket.themes.markup.html.vegibit.VegibitTheme;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -26,8 +31,9 @@ import javax.validation.Validator;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @SpringBootApplication
-public class SpringBootWicketProApplication extends WebApplication {
+public class SpringBootWicketProApplication extends WebApplication implements CommandLineRunner {
 
     public static List<ITheme> listBootstrapTheme() {
         final List<ITheme> list = new ArrayList<>();
@@ -78,6 +84,15 @@ public class SpringBootWicketProApplication extends WebApplication {
     @Autowired
     private ApplicationContext applicationContext;
 
+    @Autowired
+    private CategoryService categoryService;
+
+    @Autowired
+    private BookService bookService;
+
+    @Autowired
+    BookRepository bookRepository;
+
     public static void main(String[] args) {
         SpringApplication.run(SpringBootWicketProApplication.class, args);
     }
@@ -120,4 +135,10 @@ public class SpringBootWicketProApplication extends WebApplication {
         return new LocalValidatorFactoryBean();
     }
 
+    @Override
+    public void run(String... args) throws Exception {
+        bookRepository.findAll().forEach(book -> log.info(book.getId().toString()));
+        bookRepository.findBookByCategoryId(1L).forEach(book -> log.info(book.getId().toString()));
+        bookRepository.findBookByCategoryIdAndCategoryNameLike(1L, "J2EE").forEach(book -> log.info(book.getId().toString()));
+    }
 }

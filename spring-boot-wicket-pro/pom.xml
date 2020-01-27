@@ -23,6 +23,7 @@
         <querydsl.version>3.7.4</querydsl.version>
         <wicked.charts.version>2.0.1</wicked.charts.version>
         <wicket.bootstrap.version>0.10.16</wicket.bootstrap.version>
+        <wicket.annotation.version>1.4.17</wicket.annotation.version>
     </properties>
 
     <dependencies>
@@ -102,7 +103,6 @@
             <artifactId>log4j-core</artifactId>
             <version>2.3</version>
         </dependency>
-
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
@@ -164,6 +164,11 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.wicketstuff</groupId>
+            <artifactId>annotation</artifactId>
+            <version>${wicket.annotation.version}</version>
         </dependency>
     </dependencies>
 

@@ -1,8 +1,5 @@
 package com.tchokoapps.apache.wicket.springbootwicketpro.pages;
 
-import com.tchokoapps.apache.wicket.springbootwicketpro.pages.extensions.Login;
-import com.tchokoapps.apache.wicket.springbootwicketpro.pages.extensions.UserProfilePage;
-import com.tchokoapps.apache.wicket.springbootwicketpro.pages.extensions.Welcome;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.link.Link;
 
